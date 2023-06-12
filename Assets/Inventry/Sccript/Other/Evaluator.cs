@@ -5,7 +5,7 @@ using UnityEngine;
 public class Evaluator
 {
     CharacterBase _player;
-    List<CharacterBase> _enemyList;
+    List<CharacterBase> _enemyList = new List<CharacterBase>();
 
     public CharacterBase Player { get => _player; }
     public List<CharacterBase> Enemy { get => _enemyList; }
