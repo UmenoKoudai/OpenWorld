@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: ItemBase
   m_EditorClassIdentifier: 
   _item:
-  - _itemID: 0
+  - _itemID: 1
     _itemImage: {fileID: -61399548, guid: aa384cd41b5af9843af6aecbfaa6583e, type: 3}
     _condition:
     - rid: 1336178482037391372
     - rid: 1336178482037391383
     _ability:
-      rid: 1336178482037391373
-  - _itemID: 1
+      rid: 1336178492585279488
+  - _itemID: 2
     _itemImage: {fileID: 1163487995, guid: aa384cd41b5af9843af6aecbfaa6583e, type: 3}
     _condition:
     - rid: 1336178482037391375
     _ability:
       rid: 1336178482037391374
-  - _itemID: 2
+  - _itemID: 3
     _itemImage: {fileID: 1209579010, guid: aa384cd41b5af9843af6aecbfaa6583e, type: 3}
     _condition:
     - rid: 1336178482037391376
     _ability:
       rid: 1336178482037391377
-  - _itemID: 3
+  - _itemID: 4
     _itemImage: {fileID: -1343889255, guid: aa384cd41b5af9843af6aecbfaa6583e, type: 3}
     _condition:
     - rid: 1336178482037391378
     _ability:
       rid: 1336178482037391379
-  - _itemID: 4
+  - _itemID: 5
     _itemImage: {fileID: 334212019, guid: aa384cd41b5af9843af6aecbfaa6583e, type: 3}
     _condition:
     - rid: 1336178482037391380
@@ -49,10 +49,6 @@ MonoBehaviour:
     RefIds:
     - rid: 1336178482037391372
       type: {class: PlayerCondition, ns: , asm: Assembly-CSharp}
-    - rid: 1336178482037391373
-      type: {class: RecoveryAbility, ns: , asm: Assembly-CSharp}
-      data:
-        _recovery: 3
     - rid: 1336178482037391374
       type: {class: RecoveryAbility, ns: , asm: Assembly-CSharp}
       data:
@@ -79,3 +75,7 @@ MonoBehaviour:
         _buff: 10
     - rid: 1336178482037391383
       type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 1336178492585279488
+      type: {class: DamageAbility, ns: , asm: Assembly-CSharp}
+      data:
+        _damage: 5

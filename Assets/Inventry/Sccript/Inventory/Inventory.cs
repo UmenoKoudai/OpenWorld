@@ -16,10 +16,28 @@ public class Inventory : InstanceSystem<Inventory>
     private void Awake()
     {
         _itemSlotCount = _inventory.transform.childCount;
-        _myItems = Enumerable.Repeat(new ItemState(-1, default, 1, null), ItemSlotCount).ToArray();
-        //Load();
+        _myItems = new ItemState[_itemSlotCount];
+        List<ItemState> itemList = new List<ItemState>(Resources.Load<ItemData>("ItemBase").Item);
+        for(int i = 0; i < ItemSlotCount; i++)
+        {
+            if(i < itemList.Count)
+            {
+                if (itemList[i].ItemCount > 0)
+                {
+                    _myItems[i] = itemList[i];
+                }
+                else
+                {
+                    _myItems[i] = new ItemState(-1, default, 1, null);
+                }
+            }
+            else
+            {
+                _myItems[i] = new ItemState(-1, default, 1, null);
+            }
+        }
         SetItem();
-        //_inventory.SetActive(false);
+        _inventory.SetActive(false);
     }
 
     public void SetItem()
@@ -36,7 +54,6 @@ public class Inventory : InstanceSystem<Inventory>
             {
                 viewItem.MyItem = new ItemState(-1, default, 0, null);
             }
-            //Save();
         }
     }
 
@@ -59,49 +76,4 @@ public class Inventory : InstanceSystem<Inventory>
             }
         }
     }
-
-    //void Save()
-    //{
-    //    _getItemIndex = new int[_myItems.Length * 2];
-    //    int j = 0;
-    //    for(int i = 0; i < _myItems.Length; i++)
-    //    {
-    //        if (_myItems[i].ItemID != -1)
-    //        {
-    //            _getItemIndex[j] = _myItems[i].ItemID;
-    //            j++;
-    //            _getItemIndex[j] = _myItems[i].ItemCount;
-    //            j++;
-    //        }
-    //        else
-    //        {
-    //            break;
-    //        }
-    //    }
-    //    _getItemIndex.OnSave();
-    //}
-
-    //void Load()
-    //{
-    //    int[] loadIndex = _getItemIndex.OnLoad();
-    //    if (loadIndex != null)
-    //    {
-    //        int j = 0;
-    //        for (int i = 0; i < loadIndex.Length / 2; i++)
-    //        {
-    //            if (loadIndex[j] != -1)
-    //            {
-    //                _myItems[i] = Resources.Load<ItemData>("ItemBase").Item[loadIndex[j] - 1];
-    //                j++;
-    //                _myItems[i].ItemCount = loadIndex[j];
-    //                j++;
-    //            }
-
-    //            else
-    //            {
-    //                break;
-    //            }
-    //        }
-    //    }
-    //}
 }
