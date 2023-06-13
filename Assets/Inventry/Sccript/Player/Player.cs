@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,8 @@ using UnityEngine;
 public class Player : CharacterBase
 {
     [SerializeField] int _moveSpeed;
-     Evaluator _evl = new Evaluator();
+    [SerializeField] GameObject _menu;
+    Evaluator _evl = new Evaluator();
     Rigidbody _rb;
     float _h;
     float _v;
@@ -19,16 +21,16 @@ public class Player : CharacterBase
         _rb = GetComponent<Rigidbody>();
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            _menu.SetActive(true);
+        }
     }
     private void FixedUpdate()
     {

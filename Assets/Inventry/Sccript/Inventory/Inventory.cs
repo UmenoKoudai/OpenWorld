@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 public class Inventory : InstanceSystem<Inventory>
 {
     [SerializeField] GameObject _inventory;
+    [SerializeField] GameObject _itemSlots;
     [SerializeField] Text _moneyText;
     [SerializeField] int _money = 500; 
     ItemState[] _myItems;
@@ -20,7 +21,7 @@ public class Inventory : InstanceSystem<Inventory>
 
     private void Awake()
     {
-        _itemSlotCount = _inventory.transform.childCount;
+        _itemSlotCount = _itemSlots.transform.childCount;
         _myItems = new ItemState[_itemSlotCount];
         List<ItemState> itemList = new List<ItemState>(Resources.Load<ItemData>("ItemBase").Item);
         for(int i = 0; i < ItemSlotCount; i++)
@@ -52,7 +53,7 @@ public class Inventory : InstanceSystem<Inventory>
     {
         for(int i = 0; i < _itemSlotCount; i++)
         {
-            var viewItemParent = _inventory.transform.GetChild(i);
+            var viewItemParent = _itemSlots.transform.GetChild(i);
             var viewItem = viewItemParent.transform.GetChild(0).GetComponent<ItemButton>();
             if (_myItems[i].ItemID != -1)
             {

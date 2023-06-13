@@ -13,26 +13,8 @@ public class ActorGenerator : MonoBehaviour
 
     private void Awake()
     {
-        PlayerGeneration();
+        PlayerCon = _playerPrefab.GetComponent<Player>();
         EnemyGeneration();
-    }
-
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-
-    }
-
-    public Player PlayerGeneration()
-    {
-        _playerObj = Instantiate(_playerPrefab, transform.position, transform.rotation).transform.GetChild(0).gameObject;
-        PlayerCon = _playerObj.GetComponent<Player>();
-        return PlayerCon;
     }
 
     public void EnemyGeneration()

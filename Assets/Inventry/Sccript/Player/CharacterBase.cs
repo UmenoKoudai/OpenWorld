@@ -4,22 +4,39 @@ using UnityEngine;
 
 public abstract class CharacterBase : MonoBehaviour
 {
-    [SerializeField] int _hp;
+    [SerializeField] int _maxHp;
     [SerializeField] int _attack;
     [SerializeField] int _defense;
+    int _hp;
 
     public int HP { get => _hp; set => _hp = value; }
     public int Attack { get => _attack; set => _attack = value; }
     public int Defense { get => _defense; set => _defense = value; }
 
+    private void Awake()
+    {
+        _hp = _maxHp;
+    }
     public void Damage(int damage)
     {
+        Debug.Log("É_ÉÅÅ[ÉW");
         _hp -= damage;
+        if(_hp < 0)
+        {
+            Destroy(this);
+        }
     }
 
     public void Recovery(int recovery)
     {
-        _hp += recovery;
+        if (_hp + recovery < _maxHp)
+        {
+            _hp += recovery;
+        }
+        else
+        {
+            _hp = _maxHp;
+        }
     }
 
     public void AttackBuff(int attackBuff)
