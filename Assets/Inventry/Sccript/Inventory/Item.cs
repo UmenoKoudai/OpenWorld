@@ -10,26 +10,31 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Image>().sprite = Resources.Load<ItemData>("ItemBase").Item[_itemID - 1].ItemImage;
+        GetComponent<Image>().sprite = Resources.Load<ItemData>("ItemBase").Item[_itemID].ItemImage;
         GetComponentInChildren<Text>().text = $"{_money}";
     }
     public void Get()
     {
-        for (int i = 0; i < Inventory.Instance.ItemSlotCount; i++)
+        if (Inventory.Instance.Money > _money)
         {
-            var myItems = Inventory.Instance.MyItems;
-            if (myItems[i].ItemID == _itemID && myItems[i].ItemCount < 99)
+            Inventory.Instance.Money -= _money;
+            Inventory.Instance.SetMoney();
+            for (int i = 0; i < Inventory.Instance.ItemSlotCount; i++)
             {
-                myItems[i].ItemCount++;
-                //Inventory.Instance.SetItem();
-                break;
-            }
-            if (myItems[i].ItemID == -1)
-            {
-                myItems[i] = Resources.Load<ItemData>("ItemBase").Item[_itemID - 1];
-                myItems[i].ItemCount++;
-                //Inventory.Instance.SetItem();
-                break;
+                var myItems = Inventory.Instance.MyItems;
+                if (myItems[i].ItemID == _itemID && myItems[i].ItemCount < 99)
+                {
+                    myItems[i].ItemCount++;
+                    //Inventory.Instance.SetItem();
+                    break;
+                }
+                if (myItems[i].ItemID == -1)
+                {
+                    myItems[i] = Resources.Load<ItemData>("ItemBase").Item[_itemID];
+                    myItems[i].ItemCount++;
+                    //Inventory.Instance.SetItem();
+                    break;
+                }
             }
         }
     }

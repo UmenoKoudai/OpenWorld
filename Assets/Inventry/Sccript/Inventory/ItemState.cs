@@ -6,12 +6,14 @@ using UnityEngine;
 [Serializable]
 public class ItemState
 {
-    [SerializeField] int _itemID = -1;
-    [SerializeField] Sprite _itemImage = default;
-    int _itemCount = 1;
+    [SerializeField, Tooltip("アイテムのID")] int _itemID;
+    [SerializeField, Tooltip("アイテムの画像")] Sprite _itemImage = default;
+    int _itemCount;
 
+    [Header("アイテムの使用条件を決める")]
     [SerializeField, SerializeReference, SubclassSelector]
     List<ICondition>_condition = new List<ICondition>();
+    [Header("アイテムの効果を決める")]
     [SerializeField, SerializeReference, SubclassSelector]
     IAbility _ability = default;
 

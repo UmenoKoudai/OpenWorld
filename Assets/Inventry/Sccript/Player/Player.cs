@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : CharacterBase
 {
     [SerializeField] int _moveSpeed;
-    Evaluator _evl = new Evaluator();
+     Evaluator _evl = new Evaluator();
     Rigidbody _rb;
     float _h;
     float _v;
@@ -35,6 +35,10 @@ public class Player : CharacterBase
         var dirForward = Vector3.forward * _v + Vector3.right * _h;
         dirForward = Camera.main.transform.TransformDirection(dirForward);
         dirForward.y = 0;
+        if (_h != 0 || _v != 0)
+        {
+            transform.forward = dirForward;
+        }
         _rb.velocity = dirForward.normalized * _moveSpeed + _rb.velocity.y * Vector3.up; ;
     }
 

@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using JetBrains.Annotations;
 
 public class Inventory : InstanceSystem<Inventory>
 {
     [SerializeField] GameObject _inventory;
+    [SerializeField] Text _moneyText;
+    [SerializeField] int _money = 500; 
     ItemState[] _myItems;
     int _itemSlotCount;
     int[] _getItemIndex;
 
     public ItemState[] MyItems { get => _myItems; set => _myItems = value; }
     public int ItemSlotCount { get => _itemSlotCount; }
+    public int Money { get => _money; set => _money = value; }
 
     private void Awake()
     {
@@ -39,7 +44,10 @@ public class Inventory : InstanceSystem<Inventory>
         SetItem();
         _inventory.SetActive(false);
     }
-
+    public void SetMoney()
+    {
+        _moneyText.text = $"${_money}";
+    }
     public void SetItem()
     {
         for(int i = 0; i < _itemSlotCount; i++)
