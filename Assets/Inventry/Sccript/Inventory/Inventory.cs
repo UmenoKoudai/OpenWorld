@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using JetBrains.Annotations;
+using Cinemachine;
 
 public class Inventory : InstanceSystem<Inventory>
 {
@@ -84,5 +85,11 @@ public class Inventory : InstanceSystem<Inventory>
                 }
             }
         }
+    }
+
+    public void CloseMenu()
+    {
+        FindObjectOfType<Player>().State = Player.PLayerState.Game;
+        FindObjectOfType<CinemachineFreeLook>().enabled = true;
     }
 }
