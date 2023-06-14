@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 10
-  _attack: 10
-  _defense: 10
+  _attack: 2
+  _defense: 1
 --- !u!1 &3890358127035060257
 GameObject:
   m_ObjectHideFlags: 0

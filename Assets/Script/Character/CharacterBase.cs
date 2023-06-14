@@ -19,11 +19,11 @@ public abstract class CharacterBase : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        Debug.Log("ダメージ");
+        Debug.Log($"{gameObject.name}に{damage}ダメージ");
         _hp -= damage;
         if(_hp < 0)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
