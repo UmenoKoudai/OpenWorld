@@ -10,6 +10,8 @@ public class Player : CharacterBase
     [SerializeField] int _moveSpeed;
     [SerializeField] GameObject _menu;
     [SerializeField] float _attackInterval;
+    [SerializeField] GameObject _attackObject;
+    [SerializeField] Transform _attackEffectPoint;
     Evaluator _evl = new Evaluator();
     PLayerState _state = PLayerState.Game;
     Rigidbody _rb;
@@ -19,9 +21,11 @@ public class Player : CharacterBase
     int _attackCount;
     bool _isAttack;
     float _timer;
+    int _getMoney;
 
     public Evaluator Evaluator { get => _evl; }
     public PLayerState State { get => _state; set => _state = value; }
+    public int GetMoney { get => _getMoney; set => _getMoney = value; }
     private void Awake()
     {
         _evl.SetPlayer(this);
@@ -41,6 +45,9 @@ public class Player : CharacterBase
                 FindObjectOfType<CinemachineFreeLook>().enabled = false;
                 _state = PLayerState.MenuOpen;
                 _menu.SetActive(true);
+                Inventory.Instance.Money += _getMoney;
+                Inventory.Instance.SetMoney();
+                Inventory.Instance.SetItem();
             }
             if (_isAttack)
             {
@@ -71,6 +78,15 @@ public class Player : CharacterBase
             }
         }
     }
+    public void AttackStart()
+    {
+        Instantiate((GameObject)Resources.Load("HitEffect"), _attackObject.transform.position, transform.rotation);
+        _attackObject.SetActive(true);
+    }
+    public void AttackEnd()
+    {
+        _attackObject.SetActive(false);
+    }
     private void FixedUpdate()
     {
         if (_state == PLayerState.Game)
@@ -92,6 +108,12 @@ public class Player : CharacterBase
         if (enemy)
         {
             _evl.SetEnemy(enemy);
+        }
+        Coin coin = other.GetComponent<Coin>();
+        if (coin)
+        {
+            var dir = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) - coin.transform.position;
+            coin.GetComponent<Rigidbody>().velocity = dir.normalized;
         }
     }
 

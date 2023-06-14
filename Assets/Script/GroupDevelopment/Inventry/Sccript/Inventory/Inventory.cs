@@ -43,8 +43,16 @@ public class Inventory : InstanceSystem<Inventory>
                 _myItems[i] = new ItemState(-1, default, 1, null);
             }
         }
-        SetItem();
+        //_money += FindObjectOfType<Player>().GetMoney;
+        //SetMoney();
+        //SetItem();
         _inventory.SetActive(false);
+    }
+    private void Start()
+    {
+        _money += FindObjectOfType<Player>().GetMoney;
+        SetMoney();
+        SetItem();
     }
     public void SetMoney()
     {

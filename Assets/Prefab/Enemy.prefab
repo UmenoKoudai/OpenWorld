@@ -133,6 +133,7 @@ Transform:
   m_Children:
   - {fileID: 3888276685612361097}
   - {fileID: 3887992138471650707}
+  - {fileID: 3618224892992455566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,9 +199,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da27b90d97c2b14eba29c9f8d343658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: "\u30B9\u30E9\u30A4\u30E0"
   _maxHp: 10
   _attack: 2
   _defense: 1
+  _topEffectPoint: {fileID: 3618224892992455566}
+  _middleEffectPoint: {fileID: 0}
+  _underEffectPoint: {fileID: 0}
+  _coin: {fileID: 9212712775531657891, guid: aebffa6b79a19284da8f141325af41f6, type: 3}
+  _coinCount: 10
 --- !u!1 &3890358127035060257
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,3 +523,34 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3588662, y: 0.1749603, z: 0.000000059604645}
     m_Extent: {x: 0.62954795, y: 0.6683546, z: 0.4895594}
   m_DirtyAABB: 0
+--- !u!1 &6989217801331072386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3618224892992455566}
+  m_Layer: 0
+  m_Name: TopEffectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3618224892992455566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989217801331072386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3887748718671524255}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

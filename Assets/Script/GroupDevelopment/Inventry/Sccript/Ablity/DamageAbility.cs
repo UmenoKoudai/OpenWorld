@@ -18,6 +18,7 @@ public class DamageAbility : IAbility
                 enemy = e;
             }
         }
+        enemy.EffectInstance(CharacterBase.EffectPoint.Top, (GameObject)Resources.Load("LightningEffect"));
         enemy.Damage(_damage);
     }
 }

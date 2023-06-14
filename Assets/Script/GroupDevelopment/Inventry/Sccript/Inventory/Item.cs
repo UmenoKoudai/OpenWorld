@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     }
     public void Get()
     {
-        if (Inventory.Instance.Money > _money)
+        if (Inventory.Instance.Money >= _money)
         {
             Inventory.Instance.Money -= _money;
             Inventory.Instance.SetMoney();
