@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5179254070013149400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3449d72d6e114396e34e99b2034d7, type: 3}
+  m_Name: Selector
+  m_EditorClassIdentifier: 
+  Guid: f0e6fb613d6f3704387094fc70beade1
+  Position: {x: 195.60004, y: 0}
+  NodeChildren:
+  - {fileID: 8779488448497620065}
+  - {fileID: -4151373726095274724}
+--- !u!114 &-4151373726095274724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefc5dd74a839c84da6f09f050efb8f6, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  Guid: 949add7649e988d47b8e43ca10b50672
+  Position: {x: 448, y: 149.80002}
+  NodeChildren:
+  - {fileID: 7532309083753763299}
+  - {fileID: 8366757536974860546}
+--- !u!114 &-2670955130582980025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fdac88533688747ab0a971b7937d99, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  Guid: 87ddeb1859a98fe4dbcec947a7a0dbf9
+  Position: {x: 0, y: 0}
+  Child: {fileID: -5179254070013149400}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a64447fdd4c8ce4d9f3d138b49946f2, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  RootNode: {fileID: -2670955130582980025}
+  Nodes:
+  - {fileID: -2670955130582980025}
+  - {fileID: -5179254070013149400}
+  - {fileID: -4151373726095274724}
+  - {fileID: 8779488448497620065}
+  - {fileID: 7532309083753763299}
+  - {fileID: 8366757536974860546}
+  - {fileID: 8889292403626881138}
+  - {fileID: 9068706708660915158}
+  - {fileID: 4531540059364456809}
+  - {fileID: 3724660219963371317}
+--- !u!114 &3724660219963371317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a36d98478c7634fb467e12cf8ff5d9, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  Guid: d1e5cb69813686446ad70beaa3f3e0f3
+  Position: {x: 614.39996, y: -350.3209}
+  _attackParam: Attack
+  _attackEndNum: 0
+  _collisionDetectionStart: 0.08
+  _collisionDetectionEnd: 0.18
+  _radius: 10
+  _maxDistance: 1
+  _offset: {x: 0.7, y: 0, z: 0}
+  _damage: 5
+--- !u!114 &4531540059364456809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee5788c06a61954bb7375c1d3109fdf, type: 3}
+  m_Name: IfCheckThePerimeter
+  m_EditorClassIdentifier: 
+  Guid: 23cedfef5bd48264982d74d29eb91329
+  Position: {x: 614.4, y: -241.79999}
+  Child: {fileID: 0}
+  _sensingDistance: 5
+  _approachingState: 2
+  _distanceState: 1
+--- !u!114 &7532309083753763299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee5788c06a61954bb7375c1d3109fdf, type: 3}
+  m_Name: IfCheckThePerimeter
+  m_EditorClassIdentifier: 
+  Guid: 389ce9231b242c54b95fa12789ba67ba
+  Position: {x: 630, y: 188}
+  Child: {fileID: 0}
+  _sensingDistance: 100
+  _approachingState: 1
+  _distanceState: 2
+--- !u!114 &8366757536974860546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb86f5a49c853884685a139d3d875acc, type: 3}
+  m_Name: NavMeshPatrol
+  m_EditorClassIdentifier: 
+  Guid: 62e6163ca7640db4e9b024cc3a3773af
+  Position: {x: 630.4, y: 72.80002}
+  _patrolRange: 20
+  _goalStopTime: 10
+  _speed: 5
+--- !u!114 &8779488448497620065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefc5dd74a839c84da6f09f050efb8f6, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  Guid: 2393b43797baa494293bad330d26748c
+  Position: {x: 414, y: -38.400024}
+  NodeChildren:
+  - {fileID: 8889292403626881138}
+  - {fileID: 9068706708660915158}
+  - {fileID: 4531540059364456809}
+  - {fileID: 3724660219963371317}
+--- !u!114 &8889292403626881138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee5788c06a61954bb7375c1d3109fdf, type: 3}
+  m_Name: IfCheckThePerimeter
+  m_EditorClassIdentifier: 
+  Guid: e997ac0660090884ab8f47a2b82aca49
+  Position: {x: 614.6, y: -38.40001}
+  Child: {fileID: 0}
+  _sensingDistance: 200
+  _approachingState: 2
+  _distanceState: 1
+--- !u!114 &9068706708660915158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01edddf163646fa498e736fbfcee096e, type: 3}
+  m_Name: MoveNode
+  m_EditorClassIdentifier: 
+  Guid: 3126116b37bbd044b9afd50463165133
+  Position: {x: 614.4, y: -145.736}
+  _moveSpeed: 5
+  _rangeNum: 2

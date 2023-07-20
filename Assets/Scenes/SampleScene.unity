@@ -569,7 +569,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98886942}
-  m_LocalRotation: {x: 0.10835776, y: -0.083375566, z: 0.009120418, w: 0.9905675}
+  m_LocalRotation: {x: 0.10835759, y: -0.08337806, z: 0.00912068, w: 0.9905673}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1077,13 +1077,19 @@ MonoBehaviour:
     _talk: "\u3042\u308A\u304C\u3068\u3046\u3054\u3056\u3044\u307E\u3057\u305F"
     _buttonName: Next
     _buttonAbility:
-      rid: 1336178560275054618
+      rid: 1336178576577265668
+  - _name: 
+    _talk: 
+    _buttonName: 
+    _buttonAbility:
+      rid: 1336178576577265667
   _talkText: {fileID: 399227933}
   _nameText: {fileID: 541123647}
   _textWindow: {fileID: 1666616085}
   _buttonText: {fileID: 1247094779}
   _menu: {fileID: 328774528}
   _shortcutPanel: {fileID: 1926690072}
+  _camera: {fileID: 1689914888}
   references:
     version: 2
     RefIds:
@@ -1093,8 +1099,10 @@ MonoBehaviour:
       type: {class: NextButton, ns: , asm: Assembly-CSharp}
     - rid: 1336178560275054616
       type: {class: ShopOpenButton, ns: , asm: Assembly-CSharp}
-    - rid: 1336178560275054618
+    - rid: 1336178576577265667
       type: {class: EndTalk, ns: , asm: Assembly-CSharp}
+    - rid: 1336178576577265668
+      type: {class: NextButton, ns: , asm: Assembly-CSharp}
 --- !u!1 &189569605
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,6 +4644,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651014615}
   m_CullTransparentMesh: 1
+--- !u!1 &670246149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670246150}
+  m_Layer: 0
+  m_Name: Rspawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670246150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670246149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -292.07797, y: 103.53631, z: 356.46805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &676073272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5232,7 +5271,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732725579}
-  m_LocalRotation: {x: 0.037856914, y: -0.083812386, z: 0.0031863982, w: 0.9957571}
+  m_LocalRotation: {x: 0.037856776, y: -0.08381488, z: 0.0031864813, w: 0.9957569}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7350,8 +7389,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.108357765, y: -0.083375566, z: 0.009120418, w: 0.9905675}
-  m_LocalPosition: {x: -245.3818, y: 102.49997, z: 354.16913}
+  m_LocalRotation: {x: 0.10835762, y: -0.083378084, z: 0.009120679, w: 0.9905673}
+  m_LocalPosition: {x: -245.38179, y: 102.49997, z: 354.16913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10588,7 +10627,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386213004}
-  m_LocalRotation: {x: 0.18136689, y: -0.08247202, z: 0.015265564, w: 0.97983235}
+  m_LocalRotation: {x: 0.18136676, y: -0.08247446, z: 0.015266011, w: 0.9798322}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11737,6 +11776,7 @@ MonoBehaviour:
   _buttonText: {fileID: 1247094779}
   _menu: {fileID: 328774528}
   _shortcutPanel: {fileID: 1926690072}
+  _camera: {fileID: 0}
   references:
     version: 2
     RefIds:
@@ -13177,7 +13217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689914887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -245.3818, y: 102.49997, z: 354.16913}
+  m_LocalPosition: {x: -245.38179, y: 102.49997, z: 354.16913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16368,6 +16408,14 @@ PrefabInstance:
       propertyPath: _menu
       value: 
       objectReference: {fileID: 328774528}
+    - target: {fileID: 5805426927952212329, guid: d6fe3034f4321ec47a169ad1640a31c9, type: 3}
+      propertyPath: _respawnPoint
+      value: 
+      objectReference: {fileID: 670246150}
+    - target: {fileID: 5805426927952212329, guid: d6fe3034f4321ec47a169ad1640a31c9, type: 3}
+      propertyPath: _respawnPosint
+      value: 
+      objectReference: {fileID: 670246150}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6fe3034f4321ec47a169ad1640a31c9, type: 3}
 --- !u!4 &8617975002891689509 stripped

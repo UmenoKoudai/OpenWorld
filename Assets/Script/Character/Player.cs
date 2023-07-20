@@ -1,7 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -11,9 +8,7 @@ public class Player : CharacterBase
     [SerializeField] GameObject _menu;
     [SerializeField] float _attackInterval;
     [SerializeField] GameObject _attackObject;
-    [SerializeField] Transform _attackEffectPoint;
-    Evaluator _evl = new Evaluator();
-    PLayerState _state = PLayerState.Game;
+    [SerializeField] Transform _respawnPoint;
     Rigidbody _rb;
     Animator _anim;
     float _h;
@@ -23,19 +18,19 @@ public class Player : CharacterBase
     float _timer;
     int _getMoney;
 
-    public Evaluator Evaluator { get => _evl; }
-    public PLayerState State { get => _state; set => _state = value; }
     public int GetMoney { get => _getMoney; set => _getMoney = value; }
     private void Awake()
     {
-        _evl.SetPlayer(this);
+        base.Awake();
+        SetPlayer(this, gameObject);
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (_state == PLayerState.Game)
+        HpBar.value = HP;
+        if (State == PLayerState.Game)
         {
             _h = Input.GetAxisRaw("Horizontal");
             _v = Input.GetAxisRaw("Vertical");
@@ -43,11 +38,8 @@ public class Player : CharacterBase
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 FindObjectOfType<CinemachineFreeLook>().enabled = false;
-                _state = PLayerState.MenuOpen;
+                State = PLayerState.MenuOpen;
                 _menu.SetActive(true);
-                Inventory.Instance.Money += _getMoney;
-                Inventory.Instance.SetMoney();
-                Inventory.Instance.SetItem();
             }
             if (_isAttack)
             {
@@ -76,6 +68,10 @@ public class Player : CharacterBase
             {
                 _anim.Play("Defend");
             }
+            if(HP <= 0)
+            {
+                _anim.SetBool("IsDie", true);
+            }
         }
     }
     public void AttackStart()
@@ -87,9 +83,14 @@ public class Player : CharacterBase
     {
         _attackObject.SetActive(false);
     }
+    public void Respawn()
+    {
+        _anim.SetBool("IsDie", false);
+        transform.position = _respawnPoint.position;
+    }
     private void FixedUpdate()
     {
-        if (_state == PLayerState.Game)
+        if (State == PLayerState.Game)
         {
             var dirForward = Vector3.forward * _v + Vector3.right * _h;
             dirForward = Camera.main.transform.TransformDirection(dirForward);
@@ -107,13 +108,7 @@ public class Player : CharacterBase
         CharacterBase enemy = other.GetComponent<CharacterBase>();
         if (enemy)
         {
-            _evl.SetEnemy(enemy);
-        }
-        Coin coin = other.GetComponent<Coin>();
-        if (coin)
-        {
-            var dir = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z) - coin.transform.position;
-            coin.GetComponent<Rigidbody>().velocity = dir.normalized;
+            SetEnemy(enemy);
         }
     }
 
@@ -122,13 +117,7 @@ public class Player : CharacterBase
         CharacterBase enemy = other.GetComponent<CharacterBase>();
         if (enemy)
         {
-            _evl.RemoveEnemy(enemy);
+            RemoveEnemy(enemy);
         }
-    }
-    public enum PLayerState
-    {
-        None,
-        Game,
-        MenuOpen,
     }
 }
