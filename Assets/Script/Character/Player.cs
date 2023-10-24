@@ -1,4 +1,6 @@
 using Cinemachine;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,8 +11,10 @@ public class Player : CharacterBase
     [SerializeField] float _attackInterval;
     [SerializeField] GameObject _attackObject;
     [SerializeField] Transform _respawnPoint;
+    [SerializeField] float _coinDistance;
     Rigidbody _rb;
     Animator _anim;
+    public List<Coin> _coins = new List<Coin>();
     float _h;
     float _v;
     int _attackCount;
@@ -32,6 +36,7 @@ public class Player : CharacterBase
         HpBar.value = HP;
         if (State == PLayerState.Game)
         {
+            _coins = FindObjectsOfType<Coin>().ToList();
             _h = Input.GetAxisRaw("Horizontal");
             _v = Input.GetAxisRaw("Vertical");
             _anim.SetFloat("Speed", _rb.velocity.magnitude);
@@ -71,6 +76,7 @@ public class Player : CharacterBase
             if(HP <= 0)
             {
                 _anim.SetBool("IsDie", true);
+                Respawn();
             }
         }
     }
@@ -92,6 +98,7 @@ public class Player : CharacterBase
     {
         if (State == PLayerState.Game)
         {
+            Debug.Log($"money {_getMoney}");
             var dirForward = Vector3.forward * _v + Vector3.right * _h;
             dirForward = Camera.main.transform.TransformDirection(dirForward);
             dirForward.y = 0;
@@ -100,6 +107,20 @@ public class Player : CharacterBase
                 transform.forward = dirForward;
             }
             _rb.velocity = dirForward.normalized * _moveSpeed + _rb.velocity.y * Vector3.up;
+            foreach (var c in _coins)
+            {
+                float distance = Vector3.Distance(transform.position, c.transform.position);
+                if (distance > _coinDistance)
+                {
+                    c.GetComponent<Rigidbody>().velocity = (transform.position - c.transform.position) * 2f;
+                }
+                else
+                {
+                    _getMoney += c.Money;
+                    _coins.Remove(c);
+                    c.GetCoin();
+                }
+            }
         }
     }
 

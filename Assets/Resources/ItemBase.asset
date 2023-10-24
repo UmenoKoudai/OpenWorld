@@ -18,7 +18,7 @@ MonoBehaviour:
     _target:
       rid: 1336178560275054621
     _condition:
-    - rid: 1336178560275054622
+    - rid: 8047722619913371649
     _ability:
       rid: 1336178536454029313
   - _itemID: 1
@@ -148,8 +148,6 @@ MonoBehaviour:
       type: {class: EnemyTarget, ns: , asm: Assembly-CSharp}
     - rid: 1336178560275054621
       type: {class: PlayerTarget, ns: , asm: Assembly-CSharp}
-    - rid: 1336178560275054622
-      type: {class: PlayerCondition, ns: , asm: Assembly-CSharp}
     - rid: 1336178560275054623
       type: {class: PlayerTarget, ns: , asm: Assembly-CSharp}
     - rid: 1336178560275054624
@@ -160,3 +158,5 @@ MonoBehaviour:
         _damage: 2
     - rid: 1336178565610995713
       type: {class: EnemyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 8047722619913371649
+      type: {class: PlayerCondition, ns: , asm: Assembly-CSharp}

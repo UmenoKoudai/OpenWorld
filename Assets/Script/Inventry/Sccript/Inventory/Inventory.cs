@@ -1,10 +1,7 @@
-using System.Collections;
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.UI;
-using JetBrains.Annotations;
-using Cinemachine;
 
 public class Inventory : InstanceSystem<Inventory>
 {

@@ -7,15 +7,10 @@ using UnityEngine.UI;
 public class Coin : MonoBehaviour
 {
     [SerializeField] int _money;
+    public int Money => _money;
 
-    private void OnTriggerEnter(Collider other)
+    public void GetCoin()
     {
-        var player = other.gameObject.GetComponent<Player>();
-        if (player)
-        {
-            Debug.Log($"{_money}Money‚ðGet‚µ‚½");
-            player.GetMoney += _money;
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
