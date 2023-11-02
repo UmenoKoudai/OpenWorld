@@ -29,8 +29,8 @@ public class Data
     public int ClearCount => _clearCount;
 
     [SerializeField]
-    Image _questImage;
-    public Image QuestImage => _questImage;
+    Sprite _questImage;
+    public Sprite QuestImage => _questImage;
 
     bool _isClear;
     public bool IsClear => _isClear;

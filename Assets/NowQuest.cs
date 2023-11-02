@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static IEnemyEnum;
 
 public class NowQuest : MonoBehaviour
 {
     [SerializeField]
-    string _content;
+    Text _content;
     [SerializeField]
-    string _enemyDownCount;
+    Text _enemyDownCount;
     [SerializeField]
     QuestData _data;
     [SerializeField]
@@ -18,6 +19,8 @@ public class NowQuest : MonoBehaviour
     [SerializeField]
     Image _questImage;
 
+    int _questCount;
+
     List<Data> _questData = new List<Data>();
     Data _selectData = null;
     public Data SelectData { get => _selectData; set => _selectData = value; }
@@ -25,13 +28,31 @@ public class NowQuest : MonoBehaviour
     private void Awake()
     {
         _questData = _data.Quest;
+        SetQuestCard();
     }
     void Update()
     {
-        if (_questData != null) 
+        if (_selectData != null) 
         {
-            _content = _selectData.Content;
-            _questImage = _selectData.QuestImage;
+            _content.text = _selectData.Content;
+            _questImage.sprite = _selectData.QuestImage;
+            _enemyDownCount.text = $"{_questCount}/{_selectData.ClearCount}";
+        }
+        else
+        {
+            _content.text = "NoQuest";
+            _enemyDownCount.text = $"0/0";
+        }
+    }
+
+    public void TargetEnemyDestroy(EnemyType target)
+    {
+        if (_selectData != null)
+        {
+            if (target == _selectData.Type && _questCount <= _selectData.ClearCount)
+            {
+                _questCount++;
+            }
         }
     }
 
@@ -46,6 +67,6 @@ public class NowQuest : MonoBehaviour
 
     public void SetQuestData(Data selectQuest)
     {
-
+        _selectData = selectQuest;
     }
 }

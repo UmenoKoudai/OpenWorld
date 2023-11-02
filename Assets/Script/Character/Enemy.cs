@@ -1,18 +1,16 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
-using DG.Tweening;
-using System;
+using static IEnemyEnum;
 
 public class Enemy : CharacterBase
 {
     [SerializeField] GameObject _coin;
     [SerializeField] GameObject _attackObject;
     [SerializeField, Range(0, 8)] int _coinCount;
-
-    event Action OnDropEnd;
+    [SerializeField]
+    EnemyType _enemyType;
+    NowQuest _nowQuest;
 
     Vector3[] _coinPos =
     {
@@ -25,11 +23,18 @@ public class Enemy : CharacterBase
         new Vector3(0, 2, -1),
         new Vector3(-1, 2, -1),
     };
+
+    private void Start()
+    {
+        _nowQuest = FindObjectOfType<NowQuest>();
+    }
+
     private void Update()
     {
         HpBar.value = HP;
         if (HP <= 0)
         {
+            _nowQuest.TargetEnemyDestroy(_enemyType);
             RemoveEnemy(this);
             List<GameObject> coins = new List<GameObject>();
             int n = 0;

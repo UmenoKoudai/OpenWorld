@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceacd3ab51f4ea242aaf9bf2c52d60f3, type: 3}
   m_Name: QuestData
   m_EditorClassIdentifier: 
-  _questData: []
+  _questData:
+  - _enemyType: 0
+    _content: "\u30B9\u30E9\u30A4\u30E03\u5339\u306E\u8A0E\u4F10"
+    _clearCount: 3
+    _questImage: {fileID: 0}
+  - _enemyType: 1
+    _content: "\u30C9\u30E9\u30B4\u30F31\u5339\u306E\u8A0E\u4F10"
+    _clearCount: 1
+    _questImage: {fileID: 0}
