@@ -24,11 +24,8 @@ public abstract class CharacterBase : Evaluator
     public Transform UnderEffect { get => _underEffectPoint; }
     public Slider HpBar { get => _hpBar; set => _hpBar = value; }
     public PLayerState State { get => _state; set => _state = value; }
-    private void Start()
-    {
-        _hpBar.maxValue = _maxHp;
-        _hp = _maxHp;
-    }
+    public int MaxHp => _maxHp;
+
     public void EffectInstance(EffectPoint point, GameObject effect)
     {
         Transform effectPoint;

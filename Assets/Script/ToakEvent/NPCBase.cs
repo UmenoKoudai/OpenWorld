@@ -43,6 +43,10 @@ public abstract class NPCBase : Evaluator
         {
             _index++;
         }
+        if(_talkDeck.ButtonName == "EndTalk")
+        {
+            TalkEnd();
+        }
     }
 
     public void TalkStart()

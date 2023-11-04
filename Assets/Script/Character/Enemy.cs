@@ -23,7 +23,11 @@ public class Enemy : CharacterBase
         new Vector3(0, 2, -1),
         new Vector3(-1, 2, -1),
     };
-
+    private void OnEnable()
+    {
+        HpBar.maxValue = MaxHp;
+        HP = MaxHp;
+    }
     private void Start()
     {
         _nowQuest = FindObjectOfType<NowQuest>();

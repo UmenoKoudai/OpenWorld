@@ -178,17 +178,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4540055220906843148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5952115, y: 2.4700868, z: 3.6423}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8522405894539174974}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -86, y: 0}
+  m_AnchoredPosition: {x: -86.00003, y: 0.0000076293945}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4305919915989841681
@@ -564,7 +564,7 @@ MonoBehaviour:
   _questClearTag: {fileID: 1074466643846216723}
   _questSelectTag: {fileID: 3434974958109066022}
   _questContent: {fileID: 8522405893295977843}
-  _questImage: {fileID: 4339255077930639432}
+  _questImage: {fileID: 5175908409025320182}
 --- !u!114 &9016913259205907272
 MonoBehaviour:
   m_ObjectHideFlags: 0

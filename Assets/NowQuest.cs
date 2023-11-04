@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,13 +26,21 @@ public class NowQuest : MonoBehaviour
     Data _selectData = null;
     public Data SelectData { get => _selectData; set => _selectData = value; }
 
-    private void Awake()
+    public event Action OnClear;
+
+    private void OnEnable()
     {
         _questData = _data.Quest;
         SetQuestCard();
     }
+
     void Update()
     {
+        if(_questCount == _selectData.ClearCount)
+        {
+            OnClear?.Invoke();
+            Reset();
+        }
         if (_selectData != null) 
         {
             _content.text = _selectData.Content;
@@ -60,7 +69,8 @@ public class NowQuest : MonoBehaviour
     {
         foreach (Data data in _questData) 
         {
-            var questCard = Instantiate(_questCardPrefab, _questPanel.transform.position, transform.rotation);
+            var questCard = Instantiate(_questCardPrefab, transform.position, transform.rotation);
+            questCard.transform.SetParent(_questPanel.transform);
             questCard.GetComponent<QuestCard>().QuestData = data;
         }
     }
@@ -68,5 +78,9 @@ public class NowQuest : MonoBehaviour
     public void SetQuestData(Data selectQuest)
     {
         _selectData = selectQuest;
+    }
+    private void Reset()
+    {
+        _selectData = null;
     }
 }

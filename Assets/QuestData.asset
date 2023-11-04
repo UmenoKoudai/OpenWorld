@@ -16,8 +16,8 @@ MonoBehaviour:
   - _enemyType: 0
     _content: "\u30B9\u30E9\u30A4\u30E03\u5339\u306E\u8A0E\u4F10"
     _clearCount: 3
-    _questImage: {fileID: 0}
+    _questImage: {fileID: 21300000, guid: a8bacd444d4dcbe4ea6adf39d97fad8a, type: 3}
   - _enemyType: 1
     _content: "\u30C9\u30E9\u30B4\u30F31\u5339\u306E\u8A0E\u4F10"
     _clearCount: 1
-    _questImage: {fileID: 0}
+    _questImage: {fileID: 1377510256, guid: f6eab09a36b097c48b498e6a764a6454, type: 3}

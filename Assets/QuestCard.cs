@@ -14,18 +14,25 @@ public class QuestCard : MonoBehaviour,IPointerClickHandler, IPointerEnterHandle
     Image _questImage;
 
     NowQuest _quest;
+    bool _isClear = false;
     Data _questData;
     public Data QuestData { get => _questData; set => _questData = value; }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        _quest.OnClear += OnClear;
         _quest.SetQuestData(_questData);
         _questSelectTag.SetActive(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.SetAsLastSibling();
+        //transform.SetAsLastSibling();
+    }
+
+    void OnClear()
+    {
+        _isClear = true;
     }
 
     private void Awake()
@@ -35,11 +42,11 @@ public class QuestCard : MonoBehaviour,IPointerClickHandler, IPointerEnterHandle
 
     void Update()
     {
-        if(_questData.IsClear)
+        if(_isClear)
         {
             _questSelectTag.SetActive(false);
         }
-        _questClearTag.SetActive(_questData.IsClear);
+        _questClearTag.SetActive(_isClear);
         _questContent.text = _questData.Content;
         _questImage.sprite = _questData.QuestImage;
     }

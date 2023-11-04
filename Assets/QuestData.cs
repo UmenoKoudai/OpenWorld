@@ -31,7 +31,4 @@ public class Data
     [SerializeField]
     Sprite _questImage;
     public Sprite QuestImage => _questImage;
-
-    bool _isClear;
-    public bool IsClear => _isClear;
 }

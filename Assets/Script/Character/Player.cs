@@ -23,6 +23,11 @@ public class Player : CharacterBase
     int _getMoney;
 
     public int GetMoney { get => _getMoney; set => _getMoney = value; }
+    private void OnEnable()
+    {
+        HpBar.maxValue = MaxHp;
+        HP = MaxHp;
+    }
     private void Awake()
     {
         base.Awake();
