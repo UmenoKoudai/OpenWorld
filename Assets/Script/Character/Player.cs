@@ -6,12 +6,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : CharacterBase
 {
-    [SerializeField] int _moveSpeed;
-    [SerializeField] GameObject _menu;
-    [SerializeField] float _attackInterval;
-    [SerializeField] GameObject _attackObject;
-    [SerializeField] Transform _respawnPoint;
-    [SerializeField] float _coinDistance;
+    [SerializeField] 
+    int _moveSpeed;
+    [SerializeField] 
+    GameObject _menu;
+    [SerializeField] 
+    float _attackInterval;
+    [SerializeField] 
+    GameObject _attackObject;
+    [SerializeField] 
+    Transform _respawnPoint;
+    [SerializeField] 
+    float _coinDistance;
+    [SerializeField]
+    float _rayRange = 1.0f;
+    [SerializeField]
+    LayerMask _hitLayer;
     Rigidbody _rb;
     Animator _anim;
     public List<Coin> _coins = new List<Coin>();
@@ -83,6 +93,19 @@ public class Player : CharacterBase
                 _anim.SetBool("IsDie", true);
                 Respawn();
             }
+            Ray ray = new Ray(transform.position, transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction, Color.red);
+            if(Physics.Raycast(ray, out RaycastHit hit, _rayRange, _hitLayer))
+            {
+                
+                if(Input.GetKeyDown(KeyCode.F))
+                {
+                    if(hit.collider.gameObject.GetComponent<NPCBase>())
+                    {
+                        hit.collider.gameObject.GetComponent<NPCBase>().ButtonAbility(hit.collider.gameObject.name);
+                    }
+                }
+            }
         }
     }
     public void AttackStart()
@@ -103,7 +126,6 @@ public class Player : CharacterBase
     {
         if (State == PLayerState.Game)
         {
-            Debug.Log($"money {_getMoney}");
             var dirForward = Vector3.forward * _v + Vector3.right * _h;
             dirForward = Camera.main.transform.TransformDirection(dirForward);
             dirForward.y = 0;

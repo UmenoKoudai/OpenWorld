@@ -51,7 +51,6 @@ public abstract class CharacterBase : Evaluator
     }
     public void Damage(int damage)
     {
-        Debug.Log($"{gameObject.name}‚É{damage}ƒ_ƒ[ƒW");
         _hp -= damage;
     }
 

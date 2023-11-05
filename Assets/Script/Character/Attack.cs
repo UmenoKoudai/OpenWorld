@@ -17,7 +17,6 @@ public class Attack : MonoBehaviour
         if(opponent && myself && opponent.name != myself.name)
         {
             int damage = myself.Attack - opponent.Defense > 0 ? myself.Attack - opponent.Defense : 0;
-            Debug.Log($"{opponent.name}‚É{damage}ƒ_ƒ[ƒW—^‚¦‚½");
             opponent.Damage(damage);
         }
     }

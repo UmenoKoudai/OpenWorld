@@ -36,13 +36,13 @@ public class NowQuest : MonoBehaviour
 
     void Update()
     {
-        if(_questCount == _selectData.ClearCount)
-        {
-            OnClear?.Invoke();
-            Reset();
-        }
         if (_selectData != null) 
         {
+            if (_questCount == _selectData.ClearCount)
+            {
+                OnClear?.Invoke();
+                Reset();
+            }
             _content.text = _selectData.Content;
             _questImage.sprite = _selectData.QuestImage;
             _enemyDownCount.text = $"{_questCount}/{_selectData.ClearCount}";

@@ -12,9 +12,4 @@ public class NPCB : NPCBase
             _nameTextObj.transform.forward = new Vector3(lookForward.x, 0, lookForward.z);
         }
     }
-
-    public void Talk()
-    {
-        TalkStart();
-    }
 }
