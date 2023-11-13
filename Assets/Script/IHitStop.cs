@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : InstanceSystem<GameManager>
+public class IHitStop : MonoBehaviour
 {
-    HashSet<string> _a = new HashSet<string>();
     void Start()
     {
         

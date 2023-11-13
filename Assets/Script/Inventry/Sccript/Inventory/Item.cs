@@ -15,10 +15,9 @@ public class Item : MonoBehaviour
     }
     public void Get()
     {
-        if (Inventory.Instance.Money >= _money)
+        if (GameManager.Instance.Money >= _money)
         {
-            Inventory.Instance.Money -= _money;
-            Inventory.Instance.SetMoney();
+            GameManager.Instance.Money -= _money;
             for (int i = 0; i < Inventory.Instance.ItemSlotCount; i++)
             {
                 var myItems = Inventory.Instance.MyItems;

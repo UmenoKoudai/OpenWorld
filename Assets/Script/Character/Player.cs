@@ -1,4 +1,5 @@
 using Cinemachine;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,147 +9,145 @@ public class Player : CharacterBase
 {
     [SerializeField] 
     int _moveSpeed;
+    public int MoveSpeed => _moveSpeed;
     [SerializeField] 
     GameObject _menu;
+    public GameObject Menu => _menu;
     [SerializeField] 
     float _attackInterval;
+    public float AttackInterval => _attackInterval;
     [SerializeField] 
     GameObject _attackObject;
+    public GameObject AttackObject => _attackObject;
     [SerializeField] 
     Transform _respawnPoint;
+    public Transform RespawnPoint => _respawnPoint;
     [SerializeField] 
     float _coinDistance;
+    public float CoinDistance => _coinDistance;
     [SerializeField]
     float _rayRange = 1.0f;
+    public float RayRange => _rayRange;
     [SerializeField]
     LayerMask _hitLayer;
-    Rigidbody _rb;
-    Animator _anim;
-    public List<Coin> _coins = new List<Coin>();
-    float _h;
-    float _v;
-    int _attackCount;
-    bool _isAttack;
-    float _timer;
-    int _getMoney;
+    public LayerMask HitLayer => _hitLayer;
+    [SerializeField]
+    CinemachineFreeLook _playerCamera;
+    public CinemachineFreeLook PlayerCamera => _playerCamera;
 
+    Rigidbody _rb;
+    public Rigidbody Rb => _rb;
+    Animator _anim;
+    public Animator Animator => _anim;
+    List<Coin> _coins = new List<Coin>();
+    public List<Coin> Coins => _coins;
+    int _getMoney;
     public int GetMoney { get => _getMoney; set => _getMoney = value; }
+
+    PlayerState _state = PlayerState.Default;
+    PlayerState _nextState = PlayerState.Default;
+    bool _timeBool;
+    public bool TimeBool
+    {
+        get => _timeBool;
+        set
+        {
+            float timer = 0f;
+            while(timer < 10f)
+            {
+
+            }
+        }
+    }
+
+    PlayerMoveState _move;
+    PlayerAttackState _attack;
+    PlayerDefenseState _defense;
+    PlayerMenuOpenState _menuOpen;
+    PlayerCoinGetState _coinGet;
+    PlayerDestroyState _destroy;
+
+    public enum PlayerState
+    {
+        Default,
+        Destroy,
+    }
+
     private void OnEnable()
     {
         HpBar.maxValue = MaxHp;
         HP = MaxHp;
-    }
-    private void Awake()
-    {
         base.Awake();
         SetPlayer(this, gameObject);
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
+        _move = new PlayerMoveState(this);
+        _attack = new PlayerAttackState(this);
+        _defense = new PlayerDefenseState(this);
+        _menuOpen = new PlayerMenuOpenState(this);
+        _coinGet = new PlayerCoinGetState(this);
+        _destroy = new PlayerDestroyState(this);
     }
 
     void Update()
     {
-        HpBar.value = HP;
+        _coins = FindObjectsOfType<Coin>().ToList();
         if (State == PLayerState.Game)
         {
-            _coins = FindObjectsOfType<Coin>().ToList();
-            _h = Input.GetAxisRaw("Horizontal");
-            _v = Input.GetAxisRaw("Vertical");
-            _anim.SetFloat("Speed", _rb.velocity.magnitude);
-            if (Input.GetKeyDown(KeyCode.Q))
+            switch (_state)
             {
-                FindObjectOfType<CinemachineFreeLook>().enabled = false;
-                State = PLayerState.MenuOpen;
-                _menu.SetActive(true);
+                case PlayerState.Default:
+                    _move.Update();
+                    _attack.Update();
+                    _defense.Update();
+                    //_menuOpen.Update();
+                    break;
+                case PlayerState.Destroy:
+                    break;
             }
-            if (_isAttack)
+            if(_state != _nextState)
             {
-                _timer += Time.deltaTime;
-                if (_timer > _attackInterval)
+                switch (_nextState)
                 {
-                    _isAttack = false;
-                    _timer = 0;
-                    _attackCount = 0;
-                }
-            }
-            if (Input.GetButtonDown("Fire1"))
-            {
-                if (_attackCount == 0)
-                {
-                    _anim.Play("Attack01");
-                }
-                else
-                {
-                    _anim.Play("Attack02");
-                }
-                _isAttack = true;
-                _attackCount++;
-            }
-            if(Input.GetButton("Fire2"))
-            {
-                _anim.Play("Defend");
-            }
-            if(HP <= 0)
-            {
-                _anim.SetBool("IsDie", true);
-                Respawn();
-            }
-            Ray ray = new Ray(transform.position, transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction, Color.red);
-            if(Physics.Raycast(ray, out RaycastHit hit, _rayRange, _hitLayer))
-            {
-                
-                if(Input.GetKeyDown(KeyCode.F))
-                {
-                    if(hit.collider.gameObject.GetComponent<NPCBase>())
-                    {
-                        hit.collider.gameObject.GetComponent<NPCBase>().ButtonAbility(hit.collider.gameObject.name);
-                    }
+                    case PlayerState.Default:
+                        _move.Enter();
+                        break;
+                    case PlayerState.Destroy:
+                        _destroy.Enter();
+                        break;
                 }
             }
         }
     }
+
+    private void FixedUpdate()
+    {
+        if (State == PLayerState.Game)
+        {
+            switch (_state)
+            {
+                case PlayerState.Default:
+                    _move.FixedUpdate();
+                    _coinGet.FixedUpdate();
+                    break;
+            }
+        }
+    }
+
+    public void StateChange(PlayerState changeState)
+    {
+        _nextState = changeState;
+    }
+
     public void AttackStart()
     {
         Instantiate((GameObject)Resources.Load("HitEffect"), _attackObject.transform.position, transform.rotation);
         _attackObject.SetActive(true);
     }
+
     public void AttackEnd()
     {
         _attackObject.SetActive(false);
-    }
-    public void Respawn()
-    {
-        _anim.SetBool("IsDie", false);
-        transform.position = _respawnPoint.position;
-    }
-    private void FixedUpdate()
-    {
-        if (State == PLayerState.Game)
-        {
-            var dirForward = Vector3.forward * _v + Vector3.right * _h;
-            dirForward = Camera.main.transform.TransformDirection(dirForward);
-            dirForward.y = 0;
-            if (_h != 0 || _v != 0)
-            {
-                transform.forward = dirForward;
-            }
-            _rb.velocity = dirForward.normalized * _moveSpeed + _rb.velocity.y * Vector3.up;
-            foreach (var c in _coins)
-            {
-                float distance = Vector3.Distance(transform.position, c.transform.position);
-                if (distance > _coinDistance)
-                {
-                    c.GetComponent<Rigidbody>().velocity = (transform.position - c.transform.position) * 2f;
-                }
-                else
-                {
-                    _getMoney += c.Money;
-                    _coins.Remove(c);
-                    c.GetCoin();
-                }
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)

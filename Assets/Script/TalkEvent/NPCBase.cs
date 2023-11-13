@@ -32,14 +32,15 @@ public abstract class NPCBase : Evaluator
         Debug.Log($"[{name}]Index:{_index}");
         if(_index == 0)
         {
-            OnOpenMenu += OpenMenu;
-            OnPlayTalk += PlayTalk;
-            OnTarkStart += TalkStart;
-            OnTalkEnd += TalkEnd;
+            Instance.OnOpenMenu += OpenMenu;
+            Instance.OnPlayTalk += PlayTalk;
+            Instance.OnTarkStart += TalkStart;
+            Instance.OnTalkEnd += TalkEnd;
         }
         var evl = SetUp();
         foreach(var button in _talk[_index].ButtonAbility)
         {
+            //Debug.Log(button);
             button.ButtonEffect(evl);
         }
     }
@@ -73,10 +74,10 @@ public abstract class NPCBase : Evaluator
         _menu.SetActive(false);
         _shortcutPanel.SetActive(true);
         _index = 0;
-        OnOpenMenu -= OpenMenu;
-        OnPlayTalk -= PlayTalk;
-        OnTarkStart -= TalkStart;
-        OnTalkEnd -= TalkEnd;
+        Instance.OnOpenMenu -= OpenMenu;
+        Instance.OnPlayTalk -= PlayTalk;
+        Instance.OnTarkStart -= TalkStart;
+        Instance.OnTalkEnd -= TalkEnd;
     }
 }
 

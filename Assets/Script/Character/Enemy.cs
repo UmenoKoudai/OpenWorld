@@ -1,32 +1,46 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using static IEnemyEnum;
 
 public class Enemy : CharacterBase
 {
-    [SerializeField] GameObject _coin;
-    [SerializeField] GameObject _attackObject;
-    [SerializeField, Range(0, 8)] int _coinCount;
+    [SerializeField] 
+    GameObject _attackObject;
     [SerializeField]
     EnemyType _enemyType;
-    NowQuest _nowQuest;
+    public EnemyType EnemyType => _enemyType;
+    [SerializeField]
+    int _getMoney;
+    [SerializeField]
+    GameObject _destroyEffect;
+    public GameObject DestroyEffect => _destroyEffect;
 
-    Vector3[] _coinPos =
+    Rigidbody _rb;
+    public Rigidbody Rb { get => _rb; set => _rb = value; }
+    bool _isDestroy;
+
+    NowQuest _nowQuest;
+    EnemyMove _state = EnemyMove.None;
+    EnemyMove _next = EnemyMove.None;
+    EnemyDestroyState _destroy;
+    EnemyHitStopState _hitStop;
+
+    public enum EnemyMove
     {
-        new Vector3(1, 2, 1),
-        new Vector3(-1, 2, 1),
-        new Vector3(1, 2, -1),
-        new Vector3(1, 2, 0),
-        new Vector3(-1, 2, 0),
-        new Vector3(0, 2, 1),
-        new Vector3(0, 2, -1),
-        new Vector3(-1, 2, -1),
-    };
+        None,
+        Destroy,
+        HitStop,
+    }
+
     private void OnEnable()
     {
         HpBar.maxValue = MaxHp;
         HP = MaxHp;
+        _rb = GetComponent<Rigidbody>();
+        _hitStop = new EnemyHitStopState(this);
+        _destroy = new EnemyDestroyState(this, Instance.PlayerObj.transform, _nowQuest);
     }
     private void Start()
     {
@@ -36,23 +50,42 @@ public class Enemy : CharacterBase
     private void Update()
     {
         HpBar.value = HP;
-        if (HP <= 0)
+        if (HP <= 0 && !_isDestroy)
         {
+            _isDestroy = true;
             _nowQuest.TargetEnemyDestroy(_enemyType);
+            GameManager.Instance.Money += _getMoney;
             RemoveEnemy(this);
-            List<GameObject> coins = new List<GameObject>();
-            int n = 0;
-            for (int i = 0; i < _coinCount; i++)
-            {
-                coins.Add(Instantiate(_coin, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0))));
-            }
-            coins.ForEach(r =>
-            {
-                r.GetComponent<Rigidbody>().AddForce(_coinPos[n] * 2, ForceMode.Impulse);
-                n++;
-            });
-            Destroy(gameObject);
+            StateChange(EnemyMove.HitStop);
         }
+        switch (_state)
+        {
+            case EnemyMove.Destroy:
+                _destroy.Update();
+                break;
+            case EnemyMove.HitStop:
+                _hitStop.Update();
+                break;
+        }
+        if(_state != _next)
+        {
+            switch (_next)
+            {
+                case EnemyMove.Destroy:
+                    _destroy.Enter();
+                    break;
+                case EnemyMove.HitStop:
+                    _hitStop.Enter();
+                    break;
+            }
+            _state = _next;
+        }
+
+    }
+
+    public void StateChange(EnemyMove change)
+    {
+        _next = change;
     }
 
     public void AttackStart()
@@ -62,5 +95,9 @@ public class Enemy : CharacterBase
     public void AttackEnd()
     {
         _attackObject.SetActive(false);
+    }
+    public void Destroy(Vector3 destroyPosition)
+    {
+        Instantiate(_destroyEffect, destroyPosition, Quaternion.identity);
     }
 }

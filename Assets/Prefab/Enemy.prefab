@@ -965,9 +965,10 @@ MonoBehaviour:
   _middleEffectPoint: {fileID: 5254646897257018384}
   _underEffectPoint: {fileID: 7483304791170377671}
   _hpBar: {fileID: 1876093790}
-  _coin: {fileID: 9212712775531657891, guid: e540c61f21b46eb419e2e943fee4a037, type: 3}
   _attackObject: {fileID: 2727792710565686787}
-  _coinCount: 8
+  _enemyType: 0
+  _getMoney: 100
+  _destroyEffect: {fileID: 104829970813648393, guid: c329d19ea43908340adda1c6758e5ddf, type: 3}
 --- !u!114 &-541228114255792610
 MonoBehaviour:
   m_ObjectHideFlags: 0
