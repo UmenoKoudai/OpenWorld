@@ -41,6 +41,7 @@ public class Enemy : CharacterBase
         _rb = GetComponent<Rigidbody>();
         _hitStop = new EnemyHitStopState(this);
         _destroy = new EnemyDestroyState(this, Instance.PlayerObj.transform, _nowQuest);
+        Debug.Log(_destroy);
     }
     private void Start()
     {

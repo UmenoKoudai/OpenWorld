@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -18,6 +19,12 @@ public class Dragon : CharacterBase
     [SerializeField]
     NowQuest _quest;
     public NowQuest Quest => _quest;
+
+    [SerializeField]
+    GameObject _biteHite;
+
+    [SerializeField]
+    GameObject _blessHit;
 
     Animator _animator;
     public Animator Animator => _animator;
@@ -87,6 +94,7 @@ public class Dragon : CharacterBase
 
     void Update()
     {
+        Debug.Log(_state);
         switch(_state)
         {
             case DragonState.Default:
@@ -107,12 +115,22 @@ public class Dragon : CharacterBase
 
     public void BiteStart()
     {
-
+        _biteHite.SetActive(true);
     }
 
     public void BlessStart() 
     {
+        _blessHit.SetActive(true);
+    }
 
+    public void BiteEnd()
+    {
+        _biteHite.SetActive(false);
+    }
+
+    public void BlessEnd()
+    {
+        _blessHit.SetActive(false);
     }
 
     public void AnimationEnd()
